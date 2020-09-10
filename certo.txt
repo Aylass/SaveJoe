@@ -1,0 +1,178 @@
+using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Dia1Cena1: MonoBehaviour {
+	
+	public Text resp1;
+	public Text resp2;
+	public Text enunciado;
+	public Button btresp1;
+	public Button btresp2;
+	public Button livro;
+	public GameObject paulinho;
+	public GameObject saio;
+	public GameObject cxtexto;
+	public Text falapaulinho;
+	public Button A;
+	public Button B;
+	public Button C;
+	public Button D;
+	public Button E;
+	public Button ComoAssim;
+	public Text tcomoassim;
+	public Button trespontos;
+	public Button entrarnaescola;
+
+   public static int momento; //indica qual deve ser a fala do npc
+	
+	// Use this for initialization
+	void Start () 
+	{
+		momento = 1; //primeira fala do npc
+		livro.gameObject.SetActive (false);
+		entrarnaescola.gameObject.SetActive (false);
+		trespontos.gameObject.SetActive (false);
+		ComoAssim.gameObject.SetActive (false);
+		saio.gameObject.SetActive (false);
+		A.gameObject.SetActive (false);
+		B.gameObject.SetActive (false);
+		C.gameObject.SetActive (false);
+		D.gameObject.SetActive (false);
+		E.gameObject.SetActive (false);
+	}
+	
+	// Update is called once per frame
+	void Update () 
+	{
+		Debug.Log (momento);
+		if (momento == 1)
+		{
+			enunciado.text = "Olá! Bem-vindo ao CETEC! Eu sou Deus, e agora você é um(a) cetequiano(a).";
+			resp1.text = "*Permanecer em silêncio*";
+			resp2.text = "Oi...! Deus?";	
+		}
+		if (momento == 2) {
+			enunciado.text = "Você é muito quieto! Mas verá que no final da semana você vai ficar mais feliz... Ou não...";
+			ComoAssim.gameObject.SetActive (true);
+			tcomoassim.text = "Como assim 'ou não'?";
+			resp2.text = "";
+			resp1.text = "";
+			btresp2.gameObject.SetActive (false);
+			btresp1.gameObject.SetActive (false);
+		}
+		if (momento == 3)
+		{
+			enunciado.text = "Exato! Eu sou o Deus. O todo poderoso. O Senhor da Terra, dos mares... e do CETEC.";
+			resp2.text = "Problema e seu";
+			resp1.text = "";
+			btresp1.gameObject.SetActive (false);
+		}
+		if (momento == 4)
+		{
+			enunciado.text = "Você verá.";
+			resp1.text = "";
+			resp2.text = "";
+			//btresp2.gameObject.SetActive (false);
+			//btresp1.gameObject.SetActive (false);
+			//ComoAssim.gameObject.SetActive (false);
+			trespontos.gameObject.SetActive (true);
+			//desaparecevocevera();
+		}
+		if (momento == 5) 
+		{
+			cxtexto.gameObject.SetActive (false);
+			paulinho.gameObject.SetActive (false);
+			enunciado.text = " ";  
+		}
+		if (momento == 6) 
+		{
+			desaparece ();
+		}
+	}
+	
+	public void Resposta1 ()
+	{
+		momento = 2;
+	}
+	
+	public void Resposta2 ()
+	{
+		momento = 3;
+		desaparece ();
+
+	}
+
+	public void Respostacomoassim ()
+	{
+		momento = 4;
+	}
+
+
+
+
+	public void trespontinhos()
+
+	{   cxtexto.gameObject.SetActive (false);
+		paulinho.gameObject.SetActive (false);
+		//btresp2.gameObject.SetActive (false);
+		//btresp1.gameObject.SetActive (false);
+		Entrarnaescola();
+		momento = 5;
+	}
+
+	public void Entrarnaescola()
+	{
+		trespontos.gameObject.SetActive (false);
+		entrarnaescola.gameObject.SetActive (true);
+		//desaparece ();
+		momento = 6;
+
+	}
+
+
+	public void livrinho ()
+	{
+		if (momento == 4) 
+		{
+			livro.gameObject.SetActive (true); 
+			saio.gameObject.SetActive (false);
+			cxtexto.gameObject.SetActive (false);
+			//Application.LoadLevel ("Dia1-cena2");
+		}
+	}
+
+	public void desaparece()
+	{
+		    ComoAssim.gameObject.SetActive (false);
+		    cxtexto.gameObject.SetActive (true);
+		    entrarnaescola.gameObject.SetActive (false);	
+		    saio.gameObject.SetActive (true);
+			falapaulinho.text = "Nao tao rapido! antes voce tera que responder a essa pergunta!A PERGUNTA VEM DO BD";
+			A.gameObject.SetActive (true);
+			B.gameObject.SetActive (true);
+			C.gameObject.SetActive (true);
+			D.gameObject.SetActive (true);
+			E.gameObject.SetActive (true);
+			momento = momento+1;
+
+			//if (momento == 5)
+		//	{
+		//	     livrinho();
+		//	}
+	}
+	
+	public void SAIonara()
+	{
+		if (momento == 80) 
+		{
+			A.gameObject.SetActive (false);
+			B.gameObject.SetActive (false);
+			C.gameObject.SetActive (false);
+			D.gameObject.SetActive (false);
+			E.gameObject.SetActive (false);
+			saio.gameObject.SetActive (false);
+			livro.gameObject.SetActive(true);
+		}
+	}
+}
